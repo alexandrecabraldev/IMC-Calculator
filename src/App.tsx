@@ -1,9 +1,15 @@
-import { ContainerApp } from "./components/ContainerApp"
+import { ContainerApp } from "./components/ContainerApp";
+import { ContainerTotal } from "./components/ContainerTotal";
+import { Alert } from "./components/Alert";
 
 function App() {
   
   return (
-    <ContainerApp/>
+
+    <ContainerTotal>
+      <Alert>Digite somente números</Alert>
+      <ContainerApp/>
+    </ContainerTotal>
   )
 }
 

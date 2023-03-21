@@ -10,12 +10,6 @@ export const GlobalStyle = createGlobalStyle`
 
     body{
         background-color: ${props=>props.theme.background};
-
-        min-height: 100vh;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     h1{
