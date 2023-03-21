@@ -7,5 +7,6 @@ export const Globaltheme = {
     inputBackground: "#DCE2E9",
     borderInput: "rgba(73, 80, 87, 0.3)",
     alert: "#F03E3E",
-    
+    backgroundResult: "rgba(0, 0, 0, 0.7)",
+
 }
