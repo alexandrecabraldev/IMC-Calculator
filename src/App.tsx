@@ -2,9 +2,14 @@ import { ContainerApp } from "./components/ContainerApp";
 import { ContainerTotal } from "./components/ContainerTotal";
 import { Alert } from "./components/Alert";
 import { Result } from "./components/Result";
+import { useState } from "react";
 
 function App() {
-  //let component;
+  const [imcValue,setImcValue] = useState(0);
+
+  function handleImc(valueImc:number){
+    setImcValue(valueImc);
+  }
 
   return (
 
@@ -15,10 +20,10 @@ function App() {
         ?
           <Alert>Digite somente números</Alert>
         :
-          <Result/>
+          <Result imc={imcValue}/>
       }
       
-      <ContainerApp/>
+      <ContainerApp onHandleImc={handleImc}/>
     </ContainerTotal>
   )
 }

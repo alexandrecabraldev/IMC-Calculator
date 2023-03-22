@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export function Result(){
+
+interface PropsResult{
+    imc:number;
+}
+
+export function Result(props:PropsResult){
     return(
         <BackgroundBlack>
-            <ResultIMC>Seu IMC é de 28</ResultIMC>
+            <ResultIMC>{`Seu IMC é de ${props.imc}`}</ResultIMC>
         </BackgroundBlack>
     );
 }

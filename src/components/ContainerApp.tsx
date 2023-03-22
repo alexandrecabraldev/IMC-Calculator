@@ -6,8 +6,12 @@ import { ContainerInputs } from "./ContainerInputs";
 import { ArrowRight } from "phosphor-react";
 import { useState } from "react";
 
+interface PropsContainerApp{
+    onHandleImc:Function;
+}
 
-export function ContainerApp(){
+export function ContainerApp(props:PropsContainerApp){
+
     const [valueInputOne, setValueInputOne]= useState(0);
     const [valueInputTwo, setValueInputTwo]= useState(0);
     const [imc,setImc]= useState(0);
@@ -30,6 +34,7 @@ export function ContainerApp(){
 
     function imcCalculator(){
         setImc(valueInputOne/Math.pow(valueInputTwo,2));
+        props.onHandleImc(imc)
         console.log(imc);
     }
 
