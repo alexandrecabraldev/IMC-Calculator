@@ -1,14 +1,25 @@
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 
 interface PropsContainerInputLabel{
     title:string;
+    labelText:string;
+    onHandleInputContainerApp:Function;
 }
 
 export function ContainerInputLabel(props:PropsContainerInputLabel){
+    
+    let resultInput;
+
+    function handleInput(event:ChangeEvent<HTMLInputElement>){
+        resultInput = event.target.value;
+        props.onHandleInputContainerApp(resultInput);
+    }   
+ 
     return(
         <ContainerBoxInput>
-            <label htmlFor="weightInput">{props.title}</label>
-            <input type="number" id="weightInput"/>
+            <label htmlFor={props.labelText}>{props.title}</label>
+            <input type="number" id={props.labelText} onChange={handleInput}/>
         </ContainerBoxInput>
     );
 }

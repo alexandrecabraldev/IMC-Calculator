@@ -4,16 +4,20 @@ import { Alert } from "./components/Alert";
 import { Result } from "./components/Result";
 
 function App() {
-  
+  //let component;
+
   return (
 
     <ContainerTotal>
-      {(1!=1)
+      {
+
+        (1==1)
         ?
           <Alert>Digite somente números</Alert>
         :
-        <Result/>
+          <Result/>
       }
+      
       <ContainerApp/>
     </ContainerTotal>
   )

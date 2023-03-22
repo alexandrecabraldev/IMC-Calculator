@@ -1,6 +1,17 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+const SlideDown = keyframes`
+    0%{
+        transform: translateY(-100%);
+    }
+
+    100%{
+        transform: translateY(0);
+    }
+`;
 
 export const Alert = styled.div`
+    animation: ${SlideDown} 0.5s;
 
     display: flex;
     justify-content: center;
@@ -15,4 +26,8 @@ export const Alert = styled.div`
 
     background-color: ${props=>props.theme.alert};
     color: ${props=>props.theme.white};
+
+    
+
 `;
+
