@@ -1,5 +1,7 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
+import { useState,useContext } from "react";
+import { ContextApp } from "../context/ContextApp";
 
 interface PropsContainerInputLabel{
     title:string;
@@ -8,23 +10,42 @@ interface PropsContainerInputLabel{
 }
 
 export function ContainerInputLabel(props:PropsContainerInputLabel){
+
+    let {validation,setValidation }=useContext(ContextApp);
+    const [valueInput, setValueInput]= useState("");
     
     let resultInput;
 
+    // 
+    function reset(){
+
+        if(validation){
+            setValueInput("");
+            console.log("reset");
+        }
+ }
+
+    
     function handleInput(event:ChangeEvent<HTMLInputElement>){
         resultInput = event.target.value;
+        setValueInput(resultInput);
+
         props.onHandleInputContainerApp(resultInput);
+        //reset();
     }   
  
+
     return(
         <ContainerBoxInput>
             <label htmlFor={props.labelText}>{props.title}</label>
-            <input type="number" id={props.labelText} onChange={handleInput}/>
+            <input type="number" id={props.labelText} onChange={handleInput} value={valueInput}/>
         </ContainerBoxInput>
     );
 }
 
-const ContainerBoxInput = styled.form`
+
+
+const ContainerBoxInput = styled.div`
 
     display: flex;
     flex-direction: column;

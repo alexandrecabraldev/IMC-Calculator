@@ -1,20 +1,40 @@
 import styled from "styled-components";
+import {X} from "phosphor-react"
+import { useContext } from "react";
+import { ContextApp } from "../context/ContextApp";
 
 
 interface PropsResult{
     imc:number;
 }
 
+
+
+
 export function Result(props:PropsResult){
+    let{ setValidation } = useContext(ContextApp);
+
+    function closeScreen(){
+        setValidation(false)
+    }
+    
+
     return(
         <BackgroundBlack>
-            <ResultIMC>{`Seu IMC é de ${props.imc}`}</ResultIMC>
+            <ResultIMC>
+
+                {`Seu IMC é de ${props.imc}`}
+                <ContainerButtonClose onClick={closeScreen}>
+                    <X size={16}/>
+                </ContainerButtonClose>
+                
+            </ResultIMC>
         </BackgroundBlack>
     );
 }
 
 const ResultIMC = styled.div`
-    //position: absolute;
+    position: relative;
     padding: 2rem 3rem 3rem;
     max-width: 23rem;
     background-color: ${props=>props.theme.white};
@@ -23,6 +43,14 @@ const ResultIMC = styled.div`
     opacity: 1;
     font-weight: 700;
     font-size: 2rem;
+`;
+
+const ContainerButtonClose = styled.div`
+    position: absolute;
+    top:1rem;
+    right: 1rem;
+    line-height: 0;
+    cursor: pointer;
 `;
 
 const BackgroundBlack = styled.div`

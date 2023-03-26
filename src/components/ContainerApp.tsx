@@ -4,44 +4,69 @@ import { ContainerInner } from "./ContainerInner";
 import { Button } from "./Button";
 import { ContainerInputs } from "./ContainerInputs";
 import { ArrowRight } from "phosphor-react";
-import { useState } from "react";
+import { FormEvent, useContext } from "react";
+import { ContextApp } from "../context/ContextApp";
 
 interface PropsContainerApp{
     onHandleImc:Function;
+    //onHandleButtonClick:Function;
+
 }
 
 export function ContainerApp(props:PropsContainerApp){
 
-    const [valueInputOne, setValueInputOne]= useState(0);
-    const [valueInputTwo, setValueInputTwo]= useState(0);
-    const [imc,setImc]= useState(0);
- 
+    let {validation,imcValue,setValidation,setImcValue,inputOne,inputTwo}=useContext(ContextApp);
 
-   function handleChange1(inputValue:number|string){
+    let imcSuport=0;
+    let validationSuport =false;
+
+    function handleChange1(inputValue:string){
         
-        let inputValueOne = Number(inputValue);
-        setValueInputOne(inputValueOne);
+        inputOne = Number(inputValue);
+            
+        console.log(`value 1: ${inputOne}`);
 
-        console.log(`value 1: ${valueInputOne}`);
    }
 
-   function handleChange2(inputValue:number|string){
-        let inputValueTwo = Number(inputValue);
-        setValueInputTwo(inputValueTwo);
+   function handleChange2(inputValue:string){
 
-        console.log(`value 2: ${valueInputTwo}`);
+        inputTwo = Number(inputValue);
+    
+        console.log(`value 2: ${inputTwo}`);
+
     }
 
-    function imcCalculator(){
-        setImc(valueInputOne/Math.pow(valueInputTwo,2));
-        props.onHandleImc(imc)
-        console.log(imc);
+
+    function imcCalculator(event:FormEvent<HTMLFormElement>){
+        
+        event.preventDefault();
+        
+        if(inputOne===0 || inputTwo===0){
+            validationSuport=false;
+            //props.onHandleButtonClick(validationSuport);
+            setValidation(false); 
+            console.log(validationSuport);
+            console.log(`validatio ${validation}`)
+        }else{             
+            
+            imcSuport = inputOne/Math.pow(inputTwo,2);
+            validationSuport=true;
+            
+            setValidation(validationSuport);
+            setImcValue(imcSuport);
+            
+            props.onHandleImc(imcSuport);            
+            //props.onHandleButtonClick(validationSuport);
+            console.log(validationSuport);
+            console.log(`validatio ${validation}`)
+
+        }
+        
     }
 
     return(
 
-
-            <ContainerInner>
+            <ContainerInner onSubmit={imcCalculator}>
 
                 <Title>Cálculo de IMC</Title>
 
@@ -50,17 +75,18 @@ export function ContainerApp(props:PropsContainerApp){
                         title="Peso (kg)"
                         labelText="weightInput" 
                         onHandleInputContainerApp={handleChange1}
-                        
+
                     />
 
                     <ContainerInputLabel 
                         title="Altura (m)" 
                         labelText="heightInput"
                         onHandleInputContainerApp={handleChange2}
+
                     />
                 </ContainerInputs>
                 
-                <Button type="submit" onClick={imcCalculator}>
+                <Button type="submit">
                     <>
                         Calcular IMC
                         <ArrowRight size={16} />
@@ -68,7 +94,6 @@ export function ContainerApp(props:PropsContainerApp){
                 </Button>
 
             </ContainerInner>
-   
-        
+           
     );
 }
